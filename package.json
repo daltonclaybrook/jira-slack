@@ -1,0 +1,25 @@
+{
+  "name": "jira-slack",
+  "version": "1.0.0",
+  "description": "Jira webhooks for Slack",
+  "main": "index.js",
+  "repository": "git@github.com:daltonclaybrook/jira-slack.git",
+  "author": "Dalton Claybrook <daltonclaybrook@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.23",
+    "@types/node": "^11.11.7",
+    "@types/node-fetch": "^2.1.7",
+    "ts-node": "^8.0.3",
+    "tslint": "^5.14.0",
+    "typescript": "^3.3.4000"
+  },
+  "dependencies": {
+    "node-fetch": "^2.3.0"
+  },
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "lint": "tslint -c tslint.json 'src/**/*.ts'",
+    "build": "tsc"
+  }
+}
