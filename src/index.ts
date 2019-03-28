@@ -9,9 +9,12 @@ const lambdaHandler = async (event: Event): Promise<APIGatewayProxyResult> => {
     const payload: JiraPayload = JSON.parse(event.body || '');
     const changeItems = payload.changelog.items;
     if (changeItems.length > 0 && changeItems[0].fieldId === 'status') {
+        const project = payload.issue.fields.project;
+        const projectName = (project) ? project.name : '<unknown>';
         const message = `*** Status changed ***\n\
         Issue: ${payload.issue.key}\n\
-        Summary: ${payload.issue.summary}\n\
+        Project: ${projectName}\n\
+        Summary: ${payload.issue.fields.summary}\n\
         From: ${changeItems[0].fromString}\n\
         To: ${changeItems[0].toString}`;
 

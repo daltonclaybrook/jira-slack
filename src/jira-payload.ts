@@ -17,6 +17,10 @@ interface User {
 interface Issue {
     id: string;
     key: string;
+    fields: IssueFields;
+}
+
+interface IssueFields {
     summary: string;
     status: Status | null;
     reporter: User | null;
