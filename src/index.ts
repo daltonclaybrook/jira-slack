@@ -1,12 +1,26 @@
 import { APIGatewayProxyResult } from 'aws-lambda';
+import { JiraPayload } from './jira-payload';
 
 interface Event {
     body?: string;
 }
 
 const lambdaHandler = async (event: Event): Promise<APIGatewayProxyResult> => {
-    const body = event.body || '';
-    console.log(JSON.stringify(body));
+    const payload: JiraPayload = JSON.parse(event.body || '');
+    const changeItems = payload.changelog.items
+    if (changeItems.length > 0 && changeItems[0].fieldId === 'status') {
+        const message = `*** Status changed ***\n\
+        Issue: ${payload.issue.key}\n\
+        Summary: ${payload.issue.summary}\n\
+        From: ${changeItems[0].fromString}\n\
+        To: ${changeItems[0].toString}`
+
+        console.log(message);
+
+        if (changeItems[0].fieldId.toLowerCase() === 'design uat') {
+            console.log('sending message to design slack...');
+        }
+    }
     return {
         statusCode: 200,
         body: '',
