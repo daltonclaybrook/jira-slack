@@ -10,7 +10,7 @@ interface User {
     emailAddress: string;
     displayName: string;
     avatarUrls: {
-        "48x48": string;
+        '48x48': string;
     };
 }
 
@@ -27,7 +27,7 @@ interface Issue {
 
 interface Changelog {
     id: string;
-    items: ChangelogItem[]; 
+    items: ChangelogItem[];
 }
 
 interface ChangelogItem {
@@ -50,7 +50,7 @@ interface Project {
     key: string;
     name: string;
     avatarUrls: {
-        "48x48": string;
+        '48x48': string;
     };
 }
 

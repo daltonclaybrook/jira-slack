@@ -7,13 +7,13 @@ interface Event {
 
 const lambdaHandler = async (event: Event): Promise<APIGatewayProxyResult> => {
     const payload: JiraPayload = JSON.parse(event.body || '');
-    const changeItems = payload.changelog.items
+    const changeItems = payload.changelog.items;
     if (changeItems.length > 0 && changeItems[0].fieldId === 'status') {
         const message = `*** Status changed ***\n\
         Issue: ${payload.issue.key}\n\
         Summary: ${payload.issue.summary}\n\
         From: ${changeItems[0].fromString}\n\
-        To: ${changeItems[0].toString}`
+        To: ${changeItems[0].toString}`;
 
         console.log(message);
 
@@ -24,8 +24,8 @@ const lambdaHandler = async (event: Event): Promise<APIGatewayProxyResult> => {
     return {
         statusCode: 200,
         body: '',
-    }
-}
+    };
+};
 
 if (process.env.DEBUG) {
     lambdaHandler({ body: 'test' }).then((result) => {
